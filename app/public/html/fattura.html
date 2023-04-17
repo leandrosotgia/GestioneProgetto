@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Fattura</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid black;
+        }
+
+        th {
+            background-color: #ccc;
+        }
+
+        td,
+        th {
+            padding: 10px;
+            text-align: left;
+        }
+
+        .header {
+            background-color: #f2f2f2;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .footer {
+            background-color: #f2f2f2;
+            padding: 20px;
+            text-align: right;
+        }
+
+        .invoice-details {
+            display: inline-block;
+            vertical-align: top;
+            width: 50%;
+        }
+
+        .company-details {
+            display: inline-block;
+            vertical-align: top;
+            width: 50%;
+        }
+
+        .logo {
+            max-width: 200px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header"> <img src="logo.png" alt="Logo" class="logo">
+        <h1>Fattura</h1>
+    </div>
+    <div class="invoice-details">
+        <h2>Dettagli Fattura</h2>
+        <table>
+            <tr>
+                <th>Numero Fattura</th>
+                <td>001</td>
+            </tr>
+            <tr>
+                <th>Data Fattura</th>
+                <td>01/01/2021</td>
+            </tr>
+            <tr>
+                <th>Scadenza Fattura</th>
+                <td>01/02/2021</td>
+            </tr>
+        </table>
+    </div>
+    <div class="company-details">
+        <h2>Dati Azienda</h2>
+        <table>
+            <tr>
+                <th>Ragione Sociale</th>
+                <td>Azienda Srl</td>
+            </tr>
+            <tr>
+                <th>Indirizzo</th>
+                <td>Via Roma 1</td>
+            </tr>
+            <tr>
+                <th>Città</th>
+                <td>Roma</td>
+            </tr>
+            <tr>
+                <th>Telefono</th>
+                <td>06 1234567</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>info@azienda.com</td>
+            </tr>
+        </table>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Descrizione</th>
+                <th>Quantità</th>
+                <th>Prezzo</th>
+                <th>Totale</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Servizio 1</td>
+                <td>2</td>
+                <td>€ 50,00</td>
+                <td>€ 100,00</td>
+            </tr>
+            <tr>
+                <td>Servizio 2</td>
+                <td>1</td>
+                <td>€ 100,00</td>
+                <td>€ 100,00</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3">Totale</td>
+                <td>€ 200,00</td>
+            </tr>
+            <tr>
+                <td colspan="3">IVA (22%)</td>
+                <td>€ 44,00</td>
+            </tr>
+            <tr>
+                <td colspan="3">Totale Fattura</td>
+                <td>€ 244,00</td>
+            </tr>
+        </tfoot>
+    </table>
+    <div class="footer">
+        <p>Ringraziamo per la preferenza e restiamo a disposizione per ulteriori informazioni.</p>
+    </div>
+</body>
+
+</html>
