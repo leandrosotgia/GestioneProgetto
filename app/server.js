@@ -1,16 +1,18 @@
 require("dotenv").config();
 
-const express=require("express");
-const HTTPS=require("https");
-const fs=require("fs");
-const app=express();
+const express = require("express");
+const HTTPS = require("https");
+const fs = require("fs");
+const app = express();
 
-const HTTPSCredentials=require('./config/HTTPSCredentials');
+require('./config/expressMiddlewares')(app);
 
-const port=process.env.PORT || 8080;
-const address=process.env.ADDRESS || "127.0.0.1";
+const HTTPSCredentials = require('./config/HTTPSCredentials');
 
-let httpsServer=HTTPS.createServer(HTTPSCredentials.Get(),app);
-httpsServer.listen(port,address,function(){
-    console.log("[SERVER] online on port: %s...",port);
-})
+const port = process.env.PORT || 8080;
+const address = process.env.ADDRESS || "127.0.0.1";
+
+let httpsServer = HTTPS.createServer(HTTPSCredentials.Get(), app);
+httpsServer.listen(port, address, function () {
+    console.log("[SERVER] online on port: %s...", port);
+});
