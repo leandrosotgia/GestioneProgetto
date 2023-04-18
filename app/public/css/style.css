@@ -7,5 +7,10 @@ footer {
 }
 
 body {
-    background: #F7F3E7;
+    /* background: #F7F3E7; */
+    background: #ebeeef;
+}
+
+.navbar {
+    background-color: #f3f3f3;
 }

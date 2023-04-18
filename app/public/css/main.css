@@ -185,6 +185,7 @@ iframe {
 .wrap-login100 {
   width: 670px;
   background: #fff;
+  /* background: #667B85; */
   border-radius: 10px;
   overflow: hidden;
   position: relative;
@@ -402,8 +403,8 @@ input.input100 {
   padding: 0 20px;
   min-width: 160px;
   height: 50px;
-  background-color: #677C86;
-  /* background-color: #57b846; */
+  /* background-color: #677C86; */
+  background-color: #57b846;
   border-radius: 25px;
 
   font-family: Poppins-Regular;
