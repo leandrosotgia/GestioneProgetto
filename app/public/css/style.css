@@ -14,3 +14,7 @@ body {
 .navbar {
     background-color: #f3f3f3;
 }
+
+.navbar a{
+    font-size: 15pt;
+}
