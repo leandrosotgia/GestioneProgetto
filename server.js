@@ -39,7 +39,8 @@ app.post('/api/register', function (req, res) {
         if (errQuery.codeErr === 200) {
             console.log("Register OK");
             // createtoken
-            res.send({ msg: "Register OK", token: null, email: query.email, nome: query.nome, cognome: query.cognome });
+            tokenAdministration.createToken(results[0]);
+            res.send({ msg: "Register OK", token: tokenAdministration.token, email: query.email, nome: query.nome, cognome: query.cognome });
         }
         error(req, res, { codeErr: errQuery.codeErr, message: errQuery.message });
     });
