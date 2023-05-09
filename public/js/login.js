@@ -1,7 +1,5 @@
 $(() => {
 
-    $("#sectionRegister").hide();
-
     $("#btnRegister").on("click", function () {
         $("#sectionRegister").show();
         $("#sectionLogin").hide();

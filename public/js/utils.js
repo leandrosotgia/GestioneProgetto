@@ -83,6 +83,6 @@ function error(jqXHR, testStatus, strError) {
 		alert("Server TimeOut");
 	else {
 		//if(message != "Token inesistente")
-		alert("Errore Login. Codice Errore: " + code + " - " + message);
+		//alert("Errore Login. Codice Errore: " + code + " - " + message);
 	}
 }

@@ -62,11 +62,12 @@ tokenAdministration.prototype.readCookie = function (req, name) {
 tokenAdministration.prototype.createToken = function (user) {
 
     console.log("CREATING COOKIE FROM:")
-    console.log(user.username + " " + user.email);
+    console.log(user.Email);
 
     this.token = jwt.sign({
-        "_id": user._id,
-        "email": user.email,
+        "_id": user.idUtenti,
+        "email": user.Email,
+
         "exp": Math.floor(Date.now() / 1000 + 604800 + 2)
     },
         this.privateKey
