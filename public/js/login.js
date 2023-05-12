@@ -2,6 +2,15 @@ $(() => {
 
     AOS.init();
 
+    let _error = localStorage.getItem('error');
+
+    console.log(_error != null)
+
+    if(_error != null){
+        showAndDismissAlert("danger", _error);
+        localStorage.removeItem("error");
+    }
+
     $("#btnRegister").on("click", function () {
         $("#sectionRegister").show();
         $("#sectionLogin").hide();
@@ -31,7 +40,6 @@ $(() => {
             serverData = JSON.parse(serverData);
             console.log("NEW TOKEN: " + serverData.token);
             localStorage.setItem("token", serverData.token);
-            localStorage.setItem("email", serverData.email);
             window.location.href = "index.html";
         });
     });
@@ -55,9 +63,6 @@ $(() => {
             serverData = JSON.parse(serverData);
             console.log("NEW TOKEN: " + serverData.token);
             localStorage.setItem("token", serverData.token);
-            localStorage.setItem("email", serverData.email);
-            localStorage.setItem("nome", serverData.nome);
-            localStorage.setItem("cognome", serverData.cognome);
             window.location.href = "verifica.html";
         });
     });

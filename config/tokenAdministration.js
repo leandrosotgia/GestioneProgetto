@@ -11,6 +11,7 @@ let tokenAdministration = function () {
     this.privateKey = fs.readFileSync("keys/private.key", "UTF8");
 }
 
+
 tokenAdministration.prototype.ctrlTokenLocalStorage = function (req, callback) {
     const token = req.headers["token"].split(' ')[1];
     if (token != "null") {
@@ -62,7 +63,7 @@ tokenAdministration.prototype.readCookie = function (req, name) {
 
 tokenAdministration.prototype.createToken = function (user) {
 
-    console.log("CREATING COOKIE FROM:")
+    console.log("CREATING TOKEN FROM:")
     console.log(user);
 
     this.token = jwt.sign({

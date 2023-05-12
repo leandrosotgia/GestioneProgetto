@@ -6,7 +6,8 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!--===============================================================================================-->
-	<link rel="icon" type="image/png" href="https://uploads-ssl.webflow.com/62163d09b65ea6651fb4742e/62b436a12db16d6bda727d0b_RAPALINO-logo-tondo-col.svg" />
+	<link rel="icon" type="image/png"
+		href="https://uploads-ssl.webflow.com/62163d09b65ea6651fb4742e/62b436a12db16d6bda727d0b_RAPALINO-logo-tondo-col.svg" />
 	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
 	<!--===============================================================================================-->
@@ -27,6 +28,8 @@
 	<link rel="stylesheet" type="text/css" href="css/util.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="css/switches.css">
+
 
 	<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 	<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -36,7 +39,9 @@
 
 <body>
 	<nav class="navbar navbar-expand-lg navbar-light" data-aos="slide-down" data-aos-duration="800">
-		<a class="navbar-brand" href="#"><img src="https://uploads-ssl.webflow.com/62163d09b65ea6651fb4742e/62b436a12db16d6bda727d0b_RAPALINO-logo-tondo-col.svg" alt="" height="50" loading="lazy"></a>
+		<a class="navbar-brand" href="#"><img
+				src="https://uploads-ssl.webflow.com/62163d09b65ea6651fb4742e/62b436a12db16d6bda727d0b_RAPALINO-logo-tondo-col.svg"
+				alt="" height="50" loading="lazy"></a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
 			aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
@@ -46,7 +51,7 @@
 			<ul class="navbar-nav ml-auto">
 				<li class="nav-item active">
 					<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-					
+
 				</li>
 				<li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -75,24 +80,20 @@
 			</ul>
 		</div>
 	</nav>
-    
-    <!-- CONTENT -->
+	<div class="d-flex justify-content-center">
+		<div class="alert-messages alert-block text-center m-5" style="width:30%; z-index: 2; position:absolute"></div>
+	</div>
+	<!-- CONTENT -->
 	<div class="content">
-		<div class="container bg-dark">
-			<h2 class="mb-5 text-white p-5">Utenti test</h2>
-			<div class="table-responsive custom-table-responsive m-5">
-				<table id="tableTest" class="table custom-table">
-					<thead>
-						<tr>
-							<th scope="col">Order</th>
-							<th scope="col">Name</th>
-							<th scope="col">Occupation</th>
-							<th scope="col">Contact</th>
-							<th scope="col">Education</th>
-						</tr>
-					</thead>
-					<tbody>
-					</tbody>
+		<div class="container bg-dark rounded border">
+			<h3 class="m-3 text-white"><b>GESTIONE UTENTI</b></h3>
+			<div class="text-white">APPUNTI: Elimina tutti utenti senza pwd, genera pwd, salva, click -> edit</div>
+			<div class="table-responsive custom-table-responsive ml-3 mr-3 mb-3">
+				<div id="messageTable">
+					<h4 class="text-center">Caricamento...</h4>
+					<p class="text-center">Attendi il cariamento della tabella</p>
+				</div>
+				<table id="tableTest" class="table custom-table" data-aos="slide-down" data-aos-duration="800" style="display:none">
 				</table>
 			</div>
 		</div>
@@ -100,7 +101,7 @@
 
 
 
-    <footer class="bg-dark text-white py-3">
+	<footer class="bg-dark text-white py-3">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-6">
@@ -125,12 +126,6 @@
 	<script src="vendor/bootstrap/js/popper.js"></script>
 	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
 	<!--===============================================================================================-->
-	<script src="vendor/select2/select2.min.js"></script>
-	<!--===============================================================================================-->
-	<script src="vendor/daterangepicker/moment.min.js"></script>
-	<script src="vendor/daterangepicker/daterangepicker.js"></script>
-	<!--===============================================================================================-->
-	<script src="vendor/countdowntime/countdowntime.js"></script>
 	<!--===============================================================================================-->
 	<script src="js/main.js"></script>
 	<script src="js/gestione.js" type="application/javascript"></script>

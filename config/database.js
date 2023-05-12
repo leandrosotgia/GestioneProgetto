@@ -48,13 +48,13 @@ DB.prototype.getAllUtenti = function (callback = () => { }) {
   createConnection(function (conn, err) {
     if (err.codeErr === 200) {
       let errQuery = { codeErr: 200, message: "" }
-      conn.query(`SELECT * FROM utenti`, function (error, results, fields) {
+      conn.query(`SELECT Utenti.Nome, Utenti.Cognome, Utenti.Email, Utenti.Pwd, Utenti.IS_Admin FROM Utenti`, function (error, results, fields) {
         if (error) {
           console.log(error);
           errQuery = { codeErr: 500, message: "Errore duranze l'esecuzione della query" };
-          callback(results, errQuery);
+          callback(results, fields, errQuery);
         }
-        callback(results, errQuery);
+        callback(results, fields, errQuery);
         // fields.forEach(function (element) {
         //   console.log(element.name);
         // });
@@ -62,7 +62,7 @@ DB.prototype.getAllUtenti = function (callback = () => { }) {
       });
     }
     else {
-      callback(null, err);
+      callback(null, null, err);
     }
   });
 }
@@ -94,7 +94,7 @@ DB.prototype.insertUtente = function (query, callback = () => { }) {
       let errQuery = { codeErr: 200, message: "" };
       conn.query(`INSERT INTO Utenti (Nome, Cognome, Email, Pwd) ` +
           `VALUES ('${query.nome}', '${query.cognome}', '${query.email}', '${query.password}')`
-        , function (error, results, fields) {
+        , function (error, results) {
           if (error) {
             if(error.code === 'ER_DUP_ENTRY'){
               errQuery = { codeErr: 401, message: "Email già utilizzata" };
@@ -106,6 +106,9 @@ DB.prototype.insertUtente = function (query, callback = () => { }) {
           callback(results, errQuery);
           conn.end();
         });
+    }
+    else {
+      callback(null, err);
     }
   });
 }
@@ -133,6 +136,10 @@ DB.prototype.findLogin = function (query, callback = () => { }) {
         conn.end();
       });
     }
+    else {
+      callback(null, err);
+    }
+    
   });
 }
 
@@ -140,19 +147,25 @@ DB.prototype.checkAdmin = function (query, callback = () => { }) {
   createConnection((conn, err) => {
     if(err.codeErr === 200){
       let errQuery = { codeErr: 200, message: "" };
-      conn.query(`SELECT Utenti.Email, Utenti.IS_Admin FROM utenti WHERE Utenti.IS_Admin = 1 AND Utenti.Email = '${query.email}'`, function(error, results, fields){
+      conn.query(`SELECT Utenti.Nome, Utenti.Cognome, Utenti.Email, Utenti.IS_Admin FROM Utenti WHERE Utenti.IS_Admin = 1 AND Utenti.Email = '${query.email}'`, function(error, results, fields){
+        console.log(results, `SELECT * FROM Utenti WHERE Utenti.IS_Admin = 1 AND Utenti.Email = '${query.email}'`);
         if(error){
           errQuery = { codeErr: 501, message: "Errore durante l'esecuzione della query"};
+          console.log(errQuery.message)
         }
-        if(!results){
+        if(results.length == 0){
           errQuery = {codeErr: 401, message: "Non hai abbastanza permessi!"};
+          console.log(errQuery.message)
         }
         else{
-          console.log("ACCESSO RILEVATO GESTIONE UTENTI FROM ", query.email);
+          console.log("ACCESSO RILEVATO GESTIONE UTENTI FROM", query.email);
         }
         callback(results, errQuery);
         conn.end();
       })
+    }
+    else {
+      callback(null, err);
     }
   });
 }

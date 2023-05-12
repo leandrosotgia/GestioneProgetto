@@ -5,6 +5,11 @@
     height: 50px;
 } */
 
+.table-responsive {
+    overflow-x: auto;
+    max-width: 100%;
+  }
+
 footer {
     position: fixed;
     left: 0;

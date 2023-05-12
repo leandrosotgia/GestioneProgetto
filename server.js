@@ -16,7 +16,10 @@ const db = require('./config/database.js');
 
 const HTTPSCredentials = require('./config/HTTPSCredentials');
 const tokenAdministration = require("./config/tokenAdministration");
-const { token } = require("./config/tokenAdministration");
+
+
+console.log(bcrypt.hashSync('banana123', 12));
+
 
 const port = process.env.PORT || 8080;
 const address = process.env.ADDRESS || "127.0.0.1";
@@ -74,11 +77,44 @@ app.get('/api/checkToken', function (req, res) {
     });
 });
 
+
+app.get('/api/getUtenti', function(req, res){
+    tokenAdministration.ctrlTokenLocalStorage(req, function (payload) {
+        if (!payload.err_exp) {
+
+            let query = { email: payload.email };
+            db.checkAdmin(query, function (results, errQuery) {
+
+                if (errQuery.codeErr === 200) {
+                    console.log(results, errQuery);
+                    console.log("ADMIN OK");
+
+                    db.getAllUtenti(function(results, fields, errQuery){
+                        console.log(results);
+                        if(errQuery.codeErr === 200){
+                            res.send({msg: 'Dati Utenti OK', fields: fields, results: results });
+                        }
+                        else
+                            error(req, res, { codeErr: errQuery.codeErr, message: errQuery.message });
+                    });
+                }
+                else
+                    error(req, res, { codeErr: errQuery.codeErr, message: errQuery.message });
+            });
+        } else {
+            console.log(payload.message);
+            error(req, res, { codeErr: 403, message: payload.message });
+        }
+    });
+})
+
 app.post('/api/checkAdmin', function (req, res) {
     tokenAdministration.ctrlTokenLocalStorage(req, function (payload) {
         if (!payload.err_exp) {
 
-            let query = { email: req.body.email };
+            console.log(payload);
+
+            let query = { email: payload.email };
             db.checkAdmin(query, function (results, errQuery) {
 
                 if (errQuery.codeErr === 200) {
@@ -89,7 +125,6 @@ app.post('/api/checkAdmin', function (req, res) {
                 else
                     error(req, res, { codeErr: errQuery.codeErr, message: errQuery.message });
             });
-            res.send({ msg: "Token OK, Init pagina", data: {} });
         } else {
             console.log(payload.message);
             error(req, res, { codeErr: 403, message: payload.message });

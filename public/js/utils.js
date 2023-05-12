@@ -1,37 +1,68 @@
 /*UTILS.JS*/
 
 function ValidateEmail(mail) {
-    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail)) {
-        return (true)
-    }
-    return (false)
+	if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail)) {
+		return (true)
+	}
+	return (false)
 }
 
-function showAndDismissAlert(type, message) {
-    var htmlAlert = '<div class="alert alert-' + type + '">' + message + '</div>';
-    $(".alert-messages").empty();
+function showAndDismissAlert(type, message, fade = true) {
+	let htmlAlert = '<div class="alert alert-' + type + '">' + message + '</div>';
+	$(".alert-messages").empty();
 
-    $(".alert-messages").prepend(htmlAlert);
-    $(".alert-messages .alert").first().hide().fadeIn(200).delay(2000).fadeOut(1000, function () { $(this).remove(); });
+	$(".alert-messages").prepend(htmlAlert);
+	if (fade) {
+		$(".alert-messages .alert").first().hide().fadeIn(200).delay(2000).fadeOut(1000, function () { $(this).remove(); });
+	}
+	else {
+		$(".alert-messages .alert").first().hide();
+	}
 }
 
 
-function CreateDynamicTable(data, columns, tableSelector) {
-    //if (serverData.data.length == 0) {
-    //    $(".table-responsive").hide();
-    //    $("#content-voti").append($("<h1></h1>").text("Non hai ancora nessun voto!"))
-    //}
+function CreateDynamicTable(dati, campi, selettore) {
+	var thead = '<thead><tr>';
+	for (let i = 0; i < campi.length; i++) {
+		let campo = campi[i].name;
+		if (campo === 'IS_Admin') {
+			campo = 'Admin';
+		}
+		thead += '<th>' + campo + '</th>';
+	}
+	thead += '</tr></thead>';
 
-    var tbody = tableSelector.children('tbody').eq(0);
+	let tbody = '<tbody>';
+	for (let j = 0; j < dati.length; j++) {
+		tbody += '<tr onclick="handleRowClick(this)">';
+		for (let k = 0; k < campi.length; k++) {
+			let campo = campi[k].name;
+			let cellValue = dati[j][campo];
+			if (campo === 'IS_Admin') {
+				if (cellValue.data[0] === 0) {
+					cellValue = '<label class="switch"><input type="checkbox"><span class="slider round"></span></label>';
+				} else {
+					cellValue = '<label class="switch"><input type="checkbox" checked ><span class="slider round"></span></label>';
+				}
+			}
+			else if (campo === 'Pwd') {
+				if (cellValue !== '') {
 
-    data.forEach(function (element) {
-        var tr = $('<tr scope="row">');
-        columns.forEach(function (attr) {
-            console.log(attr + " " + element[attr]);
-            tr.append('<td>' + element[attr] + '</td>');
-        });
-        tbody.append(tr);
-    });
+					cellValue = '<button class="btn btn-primary btn-sm">Genera nuova password</button>'
+				}
+				else
+					cellValue = '<button class="btn btn-success btn-sm">Genera password</button>'
+
+			}
+			tbody += '<td>' + cellValue + '</td>';
+		}
+		tbody += '</tr>';
+	}
+	tbody += '</tbody>';
+
+	let table = '<table>' + thead + tbody + '</table>';
+
+	$(selettore).html(table);
 }
 
 function sendRequest(url, method, parameters, callback) {
