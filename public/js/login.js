@@ -1,5 +1,7 @@
 $(() => {
 
+    AOS.init();
+
     $("#btnRegister").on("click", function () {
         $("#sectionRegister").show();
         $("#sectionLogin").hide();
@@ -54,7 +56,9 @@ $(() => {
             console.log("NEW TOKEN: " + serverData.token);
             localStorage.setItem("token", serverData.token);
             localStorage.setItem("email", serverData.email);
-            window.location.href = "index.html";
+            localStorage.setItem("nome", serverData.nome);
+            localStorage.setItem("cognome", serverData.cognome);
+            window.location.href = "verifica.html";
         });
     });
 });

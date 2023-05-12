@@ -136,25 +136,25 @@ DB.prototype.findLogin = function (query, callback = () => { }) {
   });
 }
 
+DB.prototype.checkAdmin = function (query, callback = () => { }) {
+  createConnection((conn, err) => {
+    if(err.codeErr === 200){
+      let errQuery = { codeErr: 200, message: "" };
+      conn.query(`SELECT Utenti.Email, Utenti.IS_Admin FROM utenti WHERE Utenti.IS_Admin = 1 AND Utenti.Email = '${query.email}'`, function(error, results, fields){
+        if(error){
+          errQuery = { codeErr: 501, message: "Errore durante l'esecuzione della query"};
+        }
+        if(!results){
+          errQuery = {codeErr: 401, message: "Non hai abbastanza permessi!"};
+        }
+        else{
+          console.log("ACCESSO RILEVATO GESTIONE UTENTI FROM ", query.email);
+        }
+        callback(results, errQuery);
+        conn.end();
+      })
+    }
+  });
+}
 
 module.exports = new DB();
-
-
-  //     conn.query(`BEGIN TRY
-  //     BEGIN TRANSACTION;
-      
-  //     IF NOT EXISTS (SELECT idUtenti FROM Utenti WHERE Email = '${email}')
-  //     BEGIN
-  //     INSERT INTO utenti (Nome, Cognome, Email) VALUES ('${query.nome}', '${query.cognome}', '${query.email}');
-  //         COMMIT TRANSACTION;
-  //         PRINT 'Indirizzo email inserito con successo';
-  //     END
-  //     ELSE
-  //     BEGIN
-  //         THROW 50000, 'Indirizzo email già presente', 1;
-  //     END
-  // END TRY
-  // BEGIN CATCH
-  //     ROLLBACK TRANSACTION;
-  //     PRINT 'Errore durante l''inserimento dell''indirizzo email: ' + ERROR_MESSAGE();
-  // END CATCH;`

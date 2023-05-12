@@ -75,100 +75,30 @@
 			</ul>
 		</div>
 	</nav>
-	<div>
-		<div class="d-flex align-items-center justify-content-center pt-5" data-aos="fade-in" data-aos-duration="1200">
-			<h2>Gestione fatture</h2>
-		</div>
-		<div class="d-flex align-items-center justify-content-center pt-1" data-aos="fade-in" data-aos-duration="1500">
-			<h6>test</h6>
-		</div>
-	</div>
 	<div class="limiter">
 		<div class="d-flex justify-content-center">
 			<div class="alert-messages alert-block text-center m-5" style="width:30%; z-index: 2; position:absolute"></div>
 		</div>
 		<div class="container-login100">
-			<div class="wrap-login100" id="sectionLogin" data-aos="zoom-in"
-			data-aos-duration="1000">
-				<div class="login100-form-title" style="background-image: url(images/bg-01.jpg);">
+			<div class="wrap-login100" id="sectionLogin " data-aos="fade-up" data-aos-duration="1300">
+				<div class="login100-form-title" style="background-image: url(images/bg-02.jpg);">
 					<span class="login100-form-title-1">
-						Esegui l'accesso
+						Verifica delle credenziali di accesso
 					</span>
 				</div>
+				<div class="pl-5 pr-5 pt-5" id="greetings">
+					<h3>Credenziali di accesso email</h3><br>
 
-				<div class="login100-form validate-form" id="campiLogin"> <!-- method="POST" action="TESTAPI" name="formLogin" -->
-					<div class="wrap-input100 validate-input m-b-26" data-validate="L'email è richiesta">
-						<span class="label-input100">Email</span>
-						<input class="input100" type="email" name="email" placeholder="Inserisci la tua email" required>
-						<span class="focus-input100"></span>
-					</div>
+					Gentile {cognome} {nome},<br>
 
-					<div class="wrap-input100 validate-input m-b-18" data-validate="La password è richiesta" >
-						<span class="label-input100">Password</span>
-						<input class="input100" type="password" name="pass" placeholder="Inserisci la tua password" required>
-						<span class="focus-input100"></span>
-					</div>
-
-					<div class="flex-sb-m w-full p-b-30 pt-5">
-						<div class="pt-3">
-							<a href="#" class="txt1">
-								Password dimenticata?
-							</a>
-							<a href="#" class="txt1 pl-5" id="btnRegister">
-								Crea un account
-							</a>
-						</div>
-					</div>
-
-					<div class="container-login100-form-btn">
-						<button class="login100-form-btn" id="btnInviaLogin">
-							Accedi
-						</button>
-					</div>
+					Vorremmo informarti che le tue credenziali di accesso saranno generate a breve e inviate all'indirizzo email fornito durante la registrazione. ({email})<br><br>
+					Assicurati di utilizzare un indirizzo email sicuro e privato a cui solo tu hai accesso. Evita di utilizzare account email condivisi o accessibili da altre persone.
 				</div>
-			</div>
-			<div class="wrap-login100" id="sectionRegister" style="display:none">
-				<div class="login100-form-title" style="background-image: url(images/bg-01.jpg);">
-					<span class="login100-form-title-1">
-						Crea un account
-					</span>
-				</div>
-
-				<div class="login100-form validate-form">
-					<div class="wrap-input100 validate-input m-b-26" data-validate="L'email è richiesta">
-						<span class="label-input100">Email</span>
-						<input class="input100" type="text" name="email" placeholder="Inserisci la tua email" required>
-						<span class="focus-input100"></span>
-					</div>
-
-					<div class="wrap-input100 validate-input m-b-18" data-validate="Il nome è richiesto">
-						<span class="label-input100">Nome</span>
-						<input class="input100" type="text" name="nome" placeholder="Inserisci il tuo nome" required>
-						<span class="focus-input100"></span>
-					</div>
-
-					<div class="wrap-input100 validate-input m-b-18" data-validate="Il cognome è richiesto">
-						<span class="label-input100">Cognome</span>
-						<input class="input100" type="text" name="cognome" placeholder="Inserisci il tuo cognome" required>
-						<span class="focus-input100"></span>
-					</div>
-
-					<div class="flex-sb-m w-full p-b-30">
-						<div>
-							<!-- <a href="#" class="txt1">
-								Password dimenticata?
-							</a> -->
-							<a href="#" class="txt1" id="btnLogin">
-								Fai l'accesso
-							</a>
-						</div>
-					</div>
-
-					<div class="container-login100-form-btn">
-						<button class="login100-form-btn" id="btnInviaRegister">
-							Registrati
-						</button>
-					</div>
+				
+				<div class="d-flex justify-content-center m-5">
+					<button class="login100-form-btn" id="btnGoBack" onclick="window.location.href = 'login.html';">
+						Torna indietro
+					</button>
 				</div>
 			</div>
 		</div>
@@ -206,7 +136,7 @@
 	<script src="vendor/countdowntime/countdowntime.js"></script>
 	<!--===============================================================================================-->
 	<script src="js/main.js"></script>
-	<script src="js/login.js" type="application/javascript"></script>
+	<script src="js/attesa_verifica.js" type="application/javascript"></script>
 	<script src="js/utils.js" type="application/javascript"></script>
 
 </body>

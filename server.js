@@ -33,13 +33,15 @@ app.post('/api/register', function (req, res) {
 
     console.log(pwd, phantomPwd);
 
-    let query = { nome: req.body.nome, cognome: req.body.cognome, email: req.body.email, password: phantomPwd}
+    let query = { nome: req.body.nome, cognome: req.body.cognome, email: req.body.email, password: phantomPwd }
     db.insertUtente(query, function (results, errQuery) {
         console.log(results, errQuery);
         if (errQuery.codeErr === 200) {
             console.log("Register OK");
             // createtoken
-            tokenAdministration.createToken(results[0]);
+
+
+            tokenAdministration.createToken(query);
             res.send({ msg: "Register OK", token: tokenAdministration.token, email: query.email, nome: query.nome, cognome: query.cognome });
         }
         error(req, res, { codeErr: errQuery.codeErr, message: errQuery.message });
@@ -47,21 +49,21 @@ app.post('/api/register', function (req, res) {
 });
 
 app.post('/api/login', function (req, res) {
-    let query = { email: req.body.email, password: req.body.password};
+    let query = { email: req.body.email, password: req.body.password };
     db.findLogin(query, function (results, errQuery) {
         console.log(results, errQuery);
         if (errQuery.codeErr === 200) {
             console.log("LOGIN OK");
             tokenAdministration.createToken(results[0]);
             console.log(tokenAdministration.token);
-            res.send({ msg: "Login OK", token: tokenAdministration.token, email: query.email, nome: query.nome, cognome: query.cognome});
+            res.send({ msg: "Login OK", token: tokenAdministration.token, email: query.email, nome: query.nome, cognome: query.cognome });
         }
         else
             error(req, res, { codeErr: errQuery.codeErr, message: errQuery.message });
     });
 });
 
-app.get('/api/checkToken', function(req, res){
+app.get('/api/checkToken', function (req, res) {
     tokenAdministration.ctrlTokenLocalStorage(req, function (payload) {
         if (!payload.err_exp) {
             res.send({ msg: "Token OK, Init pagina", data: {} });
@@ -71,6 +73,29 @@ app.get('/api/checkToken', function(req, res){
         }
     });
 });
+
+app.post('/api/checkAdmin', function (req, res) {
+    tokenAdministration.ctrlTokenLocalStorage(req, function (payload) {
+        if (!payload.err_exp) {
+
+            let query = { email: req.body.email };
+            db.checkAdmin(query, function (results, errQuery) {
+
+                if (errQuery.codeErr === 200) {
+                    console.log(results, errQuery);
+                    console.log("ADMIN OK");
+                    res.send({ msg: 'Admin OK', results: results[0].IS_Admin});
+                }
+                else
+                    error(req, res, { codeErr: errQuery.codeErr, message: errQuery.message });
+            });
+            res.send({ msg: "Token OK, Init pagina", data: {} });
+        } else {
+            console.log(payload.message);
+            error(req, res, { codeErr: 403, message: payload.message });
+        }
+    });
+})
 
 function error(req, res, err) {
     try {

@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
 const fs = require("fs");
+const utils = require('./utils');
 
 require("dotenv").config();
 
@@ -62,22 +63,19 @@ tokenAdministration.prototype.readCookie = function (req, name) {
 tokenAdministration.prototype.createToken = function (user) {
 
     console.log("CREATING COOKIE FROM:")
-    console.log(user.Email);
+    console.log(user);
 
     this.token = jwt.sign({
         "_id": user.idUtenti,
         "email": user.Email,
-
+        "nome": user.Nome,
+        "cognome": user.Cognome,
         "exp": Math.floor(Date.now() / 1000 + 604800 + 2)
     },
         this.privateKey
     );
     console.log("Creato nuovo token: " + this.token);
-    console.log(millisToMinutesAndSeconds(Date.now() / 1000 + 10));
+    console.log(utils.millisToMinutesAndSeconds(Date.now() / 1000 + 10));
 }
-function millisToMinutesAndSeconds(millis) {
-    var minutes = Math.floor(millis / 60000);
-    var seconds = ((millis % 60000) / 1000).toFixed(0);
-    return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
-}
+
 module.exports = new tokenAdministration();
